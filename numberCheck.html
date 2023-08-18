@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>www.mathworshiproot.com</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: 'Poppins','sans-serif';
+        }
+        body{
+            background-color: rgb(206, 205, 203);
+        }
+        h1{
+            text-align: center;
+        }
+        button{
+            cursor: pointer;
+        }
+        #siteName{
+            font-family: 'Poppins','sans-serif';
+            background-color: rgb(2, 9, 22);
+            color: aliceblue;
+            font-size: smaller;
+        }
+        h4{
+            font-size: small;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1 id="siteName">www.mathworship.com</h1>
+
+    <div id="prime">
+        <h4>Enter a number to check if it's prime/palindrome/Armstrong/all/none</h4>
+        <label for="userNum">Number</label>
+        <input id="userNum" type="number">
+        <button id="checkBtn">Check</button>
+        <p id="primeInfo"></p>
+        <p id="palInfo"></p>
+    </div>
+
+    
+    <script>
+
+        let checkBtn=document.getElementById('checkBtn');
+        let primeInfo=document.getElementById('primeInfo');
+        let userNum=0;
+
+        checkBtn.addEventListener('click',()=>{
+        userNum=document.getElementById('userNum').value;
+        userNum=parseInt(userNum);
+        primeCheck(userNum);
+        palCheck(userNum);
+        });
+
+        function primeCheck(n){
+            if(n<0){
+                primeInfo.innerText=`Wrong input`;
+                return;
+            }
+            else if(n==0|n==1){
+                primeInfo.innerText=`${n} is not Prime`;
+                return;
+            }
+            else if(n==2|n==3){
+                primeInfo.innerText=`${n} is Prime`;
+                return;
+            }
+            else{
+                for(let i=2;i<=Math.floor(n/2);i++){
+                    if(n%i==0){
+                        primeInfo.innerText=`${n} is not Prime`;
+                        return; 
+                    }
+                }
+                primeInfo.innerText=`${n} is Prime`;
+            }
+        }
+
+        function palCheck(n){
+            let i=n;
+            let revNum=0;
+            let digitCount=0;
+            while(i!=0){
+                revNum=revNum*10+(i%10);
+                i=Math.floor(i/10);
+                digitCount++;
+            }
+            i=n;
+            let digitSum=0;
+            while(i!=0){
+                digitSum=digitSum+Math.pow(i%10,digitCount);
+                i=Math.floor(i/10);
+            }
+
+            if(revNum==n&&n==digitSum){
+                palInfo.innerText=`${n} is a Palindrome number as ${revNum} is it's reversed number, it is a ${digitCount} digit no and it is an Armstrong no as the Armstrong sum is ${digitSum}`;
+            }
+            else if(revNum==n&&n!==digitSum){
+                palInfo.innerText=`${n} is a Palindrome number as ${revNum} is it's reversed number, it is a ${digitCount} digit no and it is not an Armstrong no as the Armstrong sum is ${digitSum}`;
+            }
+            else if(revNum!==n&&n==digitSum){
+                palInfo.innerText=`${n} is not a Palindrome number as ${revNum} is it's reversed number, it is a ${digitCount} digit no and it is an Armstrong no as the Armstrong sum is ${digitSum}`;
+            }
+            else{
+                palInfo.innerText=`${n} is not a Palindrome number as ${revNum} is it's reversed number, it is a ${digitCount} digit no and it is not an Armstrong no as the Armstrong sum is ${digitSum}`;
+            }
+        }
+        
+        
+
+
+
+
+    </script>
+</body>
+</html>
